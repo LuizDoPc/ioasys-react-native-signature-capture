@@ -59,10 +59,6 @@ public class RSSignatureCaptureMainView extends LinearLayout implements OnClickL
         ViewGroup.LayoutParams.MATCH_PARENT));
   }
 
-  public RSSignatureCaptureView getSignatureView() {
-    return signatureView;
-  }
-
   public void setSaveFileInExtStorage(Boolean saveFileInExtStorage) {
     this.saveFileInExtStorage = saveFileInExtStorage;
   }
@@ -101,7 +97,7 @@ public class RSSignatureCaptureMainView extends LinearLayout implements OnClickL
 
     // set orientation
     linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-    linearLayout.setBackgroundColor(Color.WHITE);
+    linearLayout.setBackgroundColor(Color.TRANSPARENT);
 
     // set texts, tags and OnClickListener
     saveBtn.setText("Save");
@@ -164,7 +160,7 @@ public class RSSignatureCaptureMainView extends LinearLayout implements OnClickL
       // save the signature
       if (saveFileInExtStorage) {
         FileOutputStream out = new FileOutputStream(file);
-        this.signatureView.getSignature().compress(Bitmap.CompressFormat.PNG, 90, out);
+        this.signatureView.getSignature().compress(Bitmap.CompressFormat.PNG, 0, out);
         out.flush();
         out.close();
       }
@@ -172,7 +168,7 @@ public class RSSignatureCaptureMainView extends LinearLayout implements OnClickL
 
       ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
       Bitmap resizedBitmap = getResizedBitmap(this.signatureView.getSignature());
-      resizedBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+      resizedBitmap.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
 
 
       byte[] byteArray = byteArrayOutputStream.toByteArray();
